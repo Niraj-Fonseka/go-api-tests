@@ -1,4 +1,4 @@
-package db
+package models
 
 import (
 	"fmt"
@@ -37,10 +37,18 @@ func DBInit() (*gorm.DB, error) {
 	}
 
 	//create tables at start
-	DB.AutoMigrate(&Customer{}, &Certificate{})
+	err := DB.AutoMigrate(&Class{}, &User{}).Error
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	//add relationship
-	DB.Model(&Certificate{}).AddForeignKey("cust_id", "customers(cust_id)", "CASCADE", "CASCADE")
+	err = DB.Model(&User{}).AddForeignKey("id", "classes(id)", "CASCADE", "CASCADE").Error
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return DB, err
 }
