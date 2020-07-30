@@ -9,7 +9,7 @@ import (
 )
 
 type ClassesController struct {
-	ClassService *services.ClassService
+	ClassServiceInterface services.ClassServiceInterface
 }
 
 func NewClassesController() *ClassesController {
@@ -17,7 +17,7 @@ func NewClassesController() *ClassesController {
 }
 
 func (l *ClassesController) GetClasses(c *gin.Context) {
-	classes, err := l.ClassService.GetAllClasses()
+	classes, err := l.ClassServiceInterface.GetAllClasses()
 
 	if err != nil {
 		c.JSON(500, gin.H{
@@ -40,7 +40,7 @@ func (l *ClassesController) CreateClass(c *gin.Context) {
 		return
 	}
 
-	_, err := l.ClassService.CreateClass(&class)
+	_, err := l.ClassServiceInterface.CreateClass(&class)
 
 	if err != nil {
 		c.JSON(500, gin.H{

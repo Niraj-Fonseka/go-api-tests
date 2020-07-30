@@ -7,8 +7,8 @@ import (
 )
 
 type Services struct {
-	UserService  *UserService
-	ClassService *ClassService
+	UserService  UserServiceInterface
+	ClassService ClassServiceInterface
 }
 
 func InitServices(db *gorm.DB) *Services {

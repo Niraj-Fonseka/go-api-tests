@@ -9,7 +9,7 @@ import (
 )
 
 type UserController struct {
-	UserService *services.UserService
+	UserServiceInterface services.UserServiceInterface
 }
 
 func NewUserController() *UserController {
@@ -25,7 +25,7 @@ func (u *UserController) CreateUser(c *gin.Context) {
 		return
 	}
 
-	_, err := u.UserService.CreateUser(&user)
+	_, err := u.UserServiceInterface.CreateUser(&user)
 
 	if err != nil {
 		c.JSON(500, gin.H{
@@ -38,7 +38,7 @@ func (u *UserController) CreateUser(c *gin.Context) {
 }
 
 func (u *UserController) GetUsers(c *gin.Context) {
-	users, err := u.UserService.GetAllUsers()
+	users, err := u.UserServiceInterface.GetAllUsers()
 
 	if err != nil {
 		c.JSON(500, gin.H{

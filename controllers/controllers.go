@@ -3,19 +3,19 @@ package controllers
 import "go-api-tests/services"
 
 type Controllers struct {
-	HealthController  *HealthController
-	UserController    *UserController
-	ClassesController *ClassesController
+	HealthController  HealthControllerInterface
+	UserController    UserControllerInterface
+	ClassesController ClassControllerInterface
 }
 
 func InitController(svcs *services.Services) *Controllers {
 	var controllers Controllers
 
 	userController := NewUserController()
-	userController.UserService = svcs.UserService
+	userController.UserServiceInterface = svcs.UserService
 
 	classController := NewClassesController()
-	classController.ClassService = svcs.ClassService
+	classController.ClassServiceInterface = svcs.ClassService
 
 	healthContoller := NewHealthController()
 
