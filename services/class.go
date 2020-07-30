@@ -3,7 +3,7 @@ package services
 import "go-api-tests/models"
 
 type ClassService struct {
-	ClassModel *models.Class
+	ClassModel *models.ClassModel
 }
 
 func NewClassService() *ClassService {

@@ -10,24 +10,30 @@ type User struct {
 	Class    Class  `gorm:"ForeignKey:ClassID" json:"class"`
 }
 
+type UserModel struct {
+	db *gorm.DB
+}
+
 func (u User) TableName() string {
 	return "users"
 }
 
-func NewUserModel() *User {
-	return &User{}
+func NewUserModel(db *gorm.DB) *UserModel {
+	return &UserModel{
+		db: db,
+	}
 }
 
-func (c *User) CreateUser(user *User) (*User, error) {
-	err := DB.Create(user).Error
+func (c *UserModel) CreateUser(user *User) (*User, error) {
+	err := c.db.Create(user).Error
 
 	return user, err
 }
 
-func (c *User) GetAllUsers() ([]User, error) {
+func (c *UserModel) GetAllUsers() ([]User, error) {
 	var users []User
 
-	err := DB.Preload("Class").Find(&users).Error
+	err := c.db.Preload("Class").Find(&users).Error
 
 	return users, err
 }

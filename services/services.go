@@ -1,15 +1,19 @@
 package services
 
-import "go-api-tests/models"
+import (
+	"go-api-tests/models"
+
+	"github.com/jinzhu/gorm"
+)
 
 type Services struct {
 	UserService  *UserService
 	ClassService *ClassService
 }
 
-func InitServices() *Services {
-	userModel := models.NewUserModel()
-	classModel := models.NewClassModel()
+func InitServices(db *gorm.DB) *Services {
+	userModel := models.NewUserModel(db)
+	classModel := models.NewClassModel(db)
 	userService := NewUserService()
 	userService.UserModel = userModel
 

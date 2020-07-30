@@ -11,12 +11,12 @@ import (
 func main() {
 	log.Println("Hello !")
 
-	_, err := models.DBInit()
+	db, err := models.DBInit()
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	svcs := services.InitServices()
+	svcs := services.InitServices(db)
 
 	ctls := controllers.InitController(svcs)
 

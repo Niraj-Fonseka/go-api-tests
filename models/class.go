@@ -7,23 +7,29 @@ type Class struct {
 	ClassName string `json:"class_name"`
 }
 
+type ClassModel struct {
+	db *gorm.DB
+}
+
 func (u Class) TableName() string {
 	return "classes"
 }
 
-func NewClassModel() *Class {
-	return &Class{}
+func NewClassModel(db *gorm.DB) *ClassModel {
+	return &ClassModel{
+		db: db,
+	}
 }
-func (c *Class) CreateClass(class *Class) (*Class, error) {
-	err := DB.Create(class).Error
+func (c *ClassModel) CreateClass(class *Class) (*Class, error) {
+	err := c.db.Create(class).Error
 
 	return class, err
 }
 
-func (c *Class) GetAllClasses() ([]Class, error) {
+func (c *ClassModel) GetAllClasses() ([]Class, error) {
 	var classes []Class
 
-	err := DB.Find(&classes).Error
+	err := c.db.Find(&classes).Error
 
 	return classes, err
 }
