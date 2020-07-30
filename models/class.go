@@ -1,10 +1,13 @@
 package models
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 type Class struct {
 	gorm.Model
 	ClassName string `json:"class_name"`
+	ClassID   int
 }
 
 type ClassModel struct {
@@ -21,6 +24,7 @@ func NewClassModel(db *gorm.DB) *ClassModel {
 	}
 }
 func (c *ClassModel) CreateClass(class *Class) (*Class, error) {
+
 	err := c.db.Create(class).Error
 
 	return class, err
