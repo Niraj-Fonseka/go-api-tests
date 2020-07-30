@@ -15,10 +15,10 @@ func InitServices(db *gorm.DB) *Services {
 	userModel := models.NewUserModel(db)
 	classModel := models.NewClassModel(db)
 	userService := NewUserService()
-	userService.UserModel = userModel
+	userService.UserModelInterface = userModel
 
 	classService := NewClassService()
-	classService.ClassModel = classModel
+	classService.ClassModelInterface = classModel
 
 	return &Services{
 		UserService:  userService,

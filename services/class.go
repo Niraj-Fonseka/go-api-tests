@@ -3,7 +3,7 @@ package services
 import "go-api-tests/models"
 
 type ClassService struct {
-	ClassModel *models.ClassModel
+	ClassModelInterface models.ClassModelInterface
 }
 
 func NewClassService() *ClassService {
@@ -11,9 +11,9 @@ func NewClassService() *ClassService {
 }
 
 func (c *ClassService) CreateClass(class *models.Class) (*models.Class, error) {
-	return c.ClassModel.CreateClass(class)
+	return c.ClassModelInterface.CreateClass(class)
 }
 
 func (c *ClassService) GetAllClasses() ([]models.Class, error) {
-	return c.ClassModel.GetAllClasses()
+	return c.ClassModelInterface.GetAllClasses()
 }
