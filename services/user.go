@@ -4,8 +4,7 @@ import (
 	"go-api-tests/models"
 )
 
-
-type UserService struct{
+type UserService struct {
 	UserModelInterface models.UserModelInterface
 }
 
