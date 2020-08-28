@@ -26,12 +26,13 @@ func TestGetAllClassFail(t *testing.T) {
 	mockModel := new(models.MockClass)
 	classService := NewClassService()
 	classService.ClassModelInterface = mockModel
+
 	modelErr := errors.New("Unable to get all classes")
 	var classes []models.Class
 	mockModel.On("GetAllClasses").Return(classes, modelErr)
 	resultClasses, err := classService.GetAllClasses()
 
-	assert.Equal(t, err, err, "Error should be not nil when there's an error in models")
+	assert.NotEqual(t, nil, err, "Error should be not nil when there's an error in models")
 	assert.Equal(t, len(resultClasses), len(classes), "Should Be Equal")
 	mockModel.AssertExpectations(t)
 }
