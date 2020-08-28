@@ -5,7 +5,7 @@ import (
 )
 
 type UserService struct {
-	UserModelInterface models.UserModelInterface
+	UserModel *models.UserModel
 }
 
 func NewUserService() *UserService {
@@ -13,9 +13,9 @@ func NewUserService() *UserService {
 }
 
 func (u *UserService) CreateUser(user *models.User) (*models.User, error) {
-	return u.UserModelInterface.CreateUser(user)
+	return u.UserModel.CreateUser(user)
 }
 
 func (u *UserService) GetAllUsers() ([]models.User, error) {
-	return u.UserModelInterface.GetAllUsers()
+	return u.UserModel.GetAllUsers()
 }

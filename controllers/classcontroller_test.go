@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"errors"
 	"go-api-tests/models"
 	"go-api-tests/services"
 	"net/http"
@@ -16,7 +15,7 @@ func TestGetAllClassesFail(t *testing.T) {
 
 	mockClassService := new(services.MockClassService)
 
-	mockClassService.On("GetAllClasses").Return([]models.Class{}, errors.New("boom"))
+	mockClassService.On("GetAllClasses").Return([]models.Class{}, nil)
 
 	controller := NewClassesController()
 	controller.ClassServiceInterface = mockClassService
@@ -33,7 +32,7 @@ func TestGetAllClassesFail(t *testing.T) {
 	w := httptest.NewRecorder()
 
 	r.ServeHTTP(w, req)
-	if w.Code != http.StatusInternalServerError {
+	if w.Code != http.StatusOK {
 		t.Fatalf("Expected to get status %d but instead got %d\n", http.StatusOK, w.Code)
 	}
 }
